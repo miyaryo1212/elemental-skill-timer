@@ -246,6 +246,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             progressbar_left_edge_slot1.itemconfig(
                 id, fill=self.color[self.slot1_property[1]][1]
             )
+            # クールタイム
             for i in range(60 * self.slot1_property[4]):
                 progressbar_slot1["value"] += 1 / 60
                 time.sleep(1 / 60)
@@ -271,15 +272,20 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             )
             progressbar_slot2["maximum"] = self.slot2_property[2]
             progressbar_slot2["value"] = self.slot2_property[2]
+            progressbar_right_edge_slot2.itemconfig(id, fill="#C3C3C3")
             for i in range(60 * self.slot2_property[2]):
                 progressbar_slot2["value"] -= 1 / 60
                 time.sleep(1 / 60)
             progressbar_slot2["value"] = 0
+            progressbar_left_edge_slot2.itemconfig(id, fill="#C3C3C3")
             style.configure(
                 "slot2.Horizontal.TProgressbar",
                 background=self.color[self.slot2_property[1]][1],
             )
             progressbar_slot2["maximum"] = self.slot2_property[4]
+            progressbar_left_edge_slot2.itemconfig(
+                id, fill=self.color[self.slot2_property[1]][1]
+            )
             for i in range(60 * self.slot2_property[4]):
                 progressbar_slot2["value"] += 1 / 60
                 time.sleep(1 / 60)
@@ -288,8 +294,14 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
                 "slot2.Horizontal.TProgressbar",
                 background=self.color[self.slot2_property[1]][0],
             )
+            progressbar_right_edge_slot2.itemconfig(
+                id, fill=self.color[self.slot2_property[1]][0]
+            )
+            progressbar_left_edge_slot2.itemconfig(
+                id, fill=self.color[self.slot2_property[1]][0]
+            )
 
-        def func2():
+        def func2(event):
             threading.Thread(target=slot2_pressed).start()
 
         def slot3_pressed():
@@ -299,15 +311,20 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             )
             progressbar_slot3["maximum"] = self.slot3_property[2]
             progressbar_slot3["value"] = self.slot3_property[2]
+            progressbar_right_edge_slot3.itemconfig(id, fill="#C3C3C3")
             for i in range(60 * self.slot3_property[2]):
                 progressbar_slot3["value"] -= 1 / 60
                 time.sleep(1 / 60)
             progressbar_slot3["value"] = 0
+            progressbar_left_edge_slot3.itemconfig(id, fill="#C3C3C3")
             style.configure(
                 "slot3.Horizontal.TProgressbar",
                 background=self.color[self.slot3_property[1]][1],
             )
             progressbar_slot3["maximum"] = self.slot3_property[4]
+            progressbar_left_edge_slot3.itemconfig(
+                id, fill=self.color[self.slot3_property[1]][1]
+            )
             for i in range(60 * self.slot3_property[4]):
                 progressbar_slot3["value"] += 1 / 60
                 time.sleep(1 / 60)
@@ -316,8 +333,14 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
                 "slot3.Horizontal.TProgressbar",
                 background=self.color[self.slot3_property[1]][0],
             )
+            progressbar_right_edge_slot3.itemconfig(
+                id, fill=self.color[self.slot3_property[1]][0]
+            )
+            progressbar_left_edge_slot3.itemconfig(
+                id, fill=self.color[self.slot3_property[1]][0]
+            )
 
-        def func3():
+        def func3(event):
             threading.Thread(target=slot3_pressed).start()
 
         def slot4_pressed():
@@ -327,15 +350,20 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             )
             progressbar_slot4["maximum"] = self.slot4_property[2]
             progressbar_slot4["value"] = self.slot4_property[2]
+            progressbar_right_edge_slot4.itemconfig(id, fill="#C3C3C3")
             for i in range(60 * self.slot4_property[2]):
                 progressbar_slot4["value"] -= 1 / 60
                 time.sleep(1 / 60)
             progressbar_slot4["value"] = 0
+            progressbar_left_edge_slot4.itemconfig(id, fill="#C3C3C3")
             style.configure(
                 "slot4.Horizontal.TProgressbar",
                 background=self.color[self.slot4_property[1]][1],
             )
             progressbar_slot4["maximum"] = self.slot4_property[4]
+            progressbar_left_edge_slot4.itemconfig(
+                id, fill=self.color[self.slot4_property[1]][1]
+            )
             for i in range(60 * self.slot4_property[4]):
                 progressbar_slot4["value"] += 1 / 60
                 time.sleep(1 / 60)
@@ -344,8 +372,14 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
                 "slot4.Horizontal.TProgressbar",
                 background=self.color[self.slot4_property[1]][0],
             )
+            progressbar_right_edge_slot4.itemconfig(
+                id, fill=self.color[self.slot4_property[1]][0]
+            )
+            progressbar_left_edge_slot4.itemconfig(
+                id, fill=self.color[self.slot4_property[1]][0]
+            )
 
-        def func4():
+        def func4(event):
             threading.Thread(target=slot4_pressed).start()
 
         style = Style()
@@ -513,6 +547,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot2.Horizontal.TProgressbar",
             background=self.color[self.slot2_property[1]][0],
         )
+        progressbar_slot2.bind("<Button-1>", func2)
 
         progressbar_slot3 = ttk.Progressbar(
             inner,
@@ -536,6 +571,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
         )
         progressbar_slot3["maximum"] = 1
         progressbar_slot3["value"] = 1
+        progressbar_slot3.bind("<Button-1>", func3)
 
         progressbar_slot4 = ttk.Progressbar(
             inner,
@@ -559,6 +595,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot4.Horizontal.TProgressbar",
             background=self.color[self.slot4_property[1]][0],
         )
+        progressbar_slot4.bind("<Button-1>", func4)
 
         root.bind("<Escape>", close)
         root.mainloop()
