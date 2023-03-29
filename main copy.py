@@ -225,21 +225,27 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             root.destroy()
 
         def slot1_pressed():
+            # 継続時間
             style.configure(
                 "slot1.Horizontal.TProgressbar",
                 background=self.color[self.slot1_property[1]][0],
             )
             progressbar_slot1["maximum"] = self.slot1_property[2]
             progressbar_slot1["value"] = self.slot1_property[2]
+            progressbar_right_edge_slot1.itemconfig(id, fill="#C3C3C3")
             for i in range(60 * self.slot1_property[2]):
                 progressbar_slot1["value"] -= 1 / 60
                 time.sleep(1 / 60)
             progressbar_slot1["value"] = 0
+            progressbar_left_edge_slot1.itemconfig(id, fill="#C3C3C3")
             style.configure(
                 "slot1.Horizontal.TProgressbar",
                 background=self.color[self.slot1_property[1]][1],
             )
             progressbar_slot1["maximum"] = self.slot1_property[4]
+            progressbar_left_edge_slot1.itemconfig(
+                id, fill=self.color[self.slot1_property[1]][1]
+            )
             for i in range(60 * self.slot1_property[4]):
                 progressbar_slot1["value"] += 1 / 60
                 time.sleep(1 / 60)
@@ -248,8 +254,14 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
                 "slot1.Horizontal.TProgressbar",
                 background=self.color[self.slot1_property[1]][0],
             )
+            progressbar_right_edge_slot1.itemconfig(
+                id, fill=self.color[self.slot1_property[1]][0]
+            )
+            progressbar_left_edge_slot1.itemconfig(
+                id, fill=self.color[self.slot1_property[1]][0]
+            )
 
-        def func1():
+        def func1(event):
             threading.Thread(target=slot1_pressed).start()
 
         def slot2_pressed():
@@ -344,7 +356,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
 
         root = style.master
         root.title("Elemental Skill Timer")
-        root.geometry("+1655+245")
+        root.geometry("+1605+245")
         root.resizable(False, False)
         root.attributes("-topmost", True)
         root.wm_attributes("-transparentcolor", "white")
@@ -368,6 +380,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
         column1 = tkinter.Canvas(inner, width=200, height=0)
         column1.grid(column=1, row=0, ipadx=0, ipady=0, padx=0, pady=0)
 
+        """
         icon_slot1 = ttk.Label(inner, image=iconimage[self.slot1_property[1]])
         icon_slot1.grid(column=0, row=1)
         icon_slot2 = ttk.Label(inner, image=iconimage[self.slot2_property[1]])
@@ -376,6 +389,83 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
         icon_slot3.grid(column=0, row=3)
         icon_slot4 = ttk.Label(inner, image=iconimage[self.slot4_property[1]])
         icon_slot4.grid(column=0, row=4)
+        """
+
+        progressbar_left_edge_slot1 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_left_edge_slot1.grid(
+            column=0, row=1, sticky=tkinter.E, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_left_edge_slot1.create_polygon(
+            0, 7, 10, 13, 10, 0, fill=self.color[self.slot1_property[1]][0]
+        )
+        progressbar_right_edge_slot1 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_right_edge_slot1.grid(
+            column=2, row=1, sticky=tkinter.W, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_right_edge_slot1.create_polygon(
+            0, 0, 0, 13, 10, 7, fill=self.color[self.slot1_property[1]][0]
+        )
+
+        progressbar_left_edge_slot2 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_left_edge_slot2.grid(
+            column=0, row=2, sticky=tkinter.E, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_left_edge_slot2.create_polygon(
+            0, 7, 10, 13, 10, 0, fill=self.color[self.slot2_property[1]][0]
+        )
+        progressbar_right_edge_slot2 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_right_edge_slot2.grid(
+            column=2, row=2, sticky=tkinter.W, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_right_edge_slot2.create_polygon(
+            0, 0, 0, 13, 10, 7, fill=self.color[self.slot2_property[1]][0]
+        )
+
+        progressbar_left_edge_slot3 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_left_edge_slot3.grid(
+            column=0, row=3, sticky=tkinter.E, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_left_edge_slot3.create_polygon(
+            0, 7, 10, 13, 10, 0, fill=self.color[self.slot3_property[1]][0]
+        )
+        progressbar_right_edge_slot3 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_right_edge_slot3.grid(
+            column=2, row=3, sticky=tkinter.W, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_right_edge_slot3.create_polygon(
+            0, 0, 0, 13, 10, 7, fill=self.color[self.slot3_property[1]][0]
+        )
+
+        progressbar_left_edge_slot4 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_left_edge_slot4.grid(
+            column=0, row=4, sticky=tkinter.E, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_left_edge_slot4.create_polygon(
+            0, 7, 10, 13, 10, 0, fill=self.color[self.slot4_property[1]][0]
+        )
+        progressbar_right_edge_slot4 = tkinter.Canvas(
+            inner, width=10, height=13
+        )
+        progressbar_right_edge_slot4.grid(
+            column=2, row=4, sticky=tkinter.W, ipadx=0, ipady=0, padx=0, pady=0
+        )
+        id = progressbar_right_edge_slot4.create_polygon(
+            0, 0, 0, 13, 10, 7, fill=self.color[self.slot4_property[1]][0]
+        )
 
         progressbar_slot1 = ttk.Progressbar(
             inner,
@@ -390,7 +480,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             sticky=tkinter.NSEW,
             ipadx=0,
             ipady=0,
-            padx=10,
+            padx=0,
             pady=42,
         )
         progressbar_slot1["maximum"] = 1
@@ -399,6 +489,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot1.Horizontal.TProgressbar",
             background=self.color[self.slot1_property[1]][0],
         )
+        progressbar_slot1.bind("<Button-1>", func1)
 
         progressbar_slot2 = ttk.Progressbar(
             inner,
@@ -413,7 +504,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             sticky=tkinter.NSEW,
             ipadx=0,
             ipady=0,
-            padx=10,
+            padx=0,
             pady=42,
         )
         progressbar_slot2["maximum"] = 1
@@ -436,7 +527,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             sticky=tkinter.NSEW,
             ipadx=0,
             ipady=0,
-            padx=10,
+            padx=0,
             pady=42,
         )
         style.configure(
@@ -459,7 +550,7 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             sticky=tkinter.NSEW,
             ipadx=0,
             ipady=0,
-            padx=10,
+            padx=0,
             pady=42,
         )
         progressbar_slot4["maximum"] = 1
