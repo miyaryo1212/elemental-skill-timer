@@ -6,17 +6,22 @@ import tkinter.filedialog
 import tkinter.messagebox
 import tkinter.ttk as ttk
 
+import keyboard
 from ttkbootstrap import Style
 
 
 class Application:
     def __init__(self):
-        self.current_slot = 3
+        self.current_slot = 1
         # (元素, 継続時間, クールタイム, 差分)
         self.slot1_property = ("Alhaitham", "dendro", 12, 18, 6)
         self.slot2_property = ("Fischl", "electro", 10, 25, 15)
         self.slot3_property = ("Xingqiu", "hydro", 15, 21, 6)
         self.slot4_property = ("Barbara", "hydro", 15, 32, 17)
+        self.slot1_active = True
+        self.slot2_active = True
+        self.slot3_active = True
+        self.slot4_active = True
         self.color = {
             "geo": ("#B2881A", "#E6B322"),
             "pyro": ("#CC4733", "#FF6F63"),
@@ -225,6 +230,10 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             root.destroy()
 
         def slot1_pressed():
+            if not self.slot1_active:
+                quit()
+            else:
+                self.slot1_active = False
             # 継続時間
             style.configure(
                 "slot1.Horizontal.TProgressbar",
@@ -261,11 +270,16 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             progressbar_left_edge_slot1.itemconfig(
                 id, fill=self.color[self.slot1_property[1]][0]
             )
+            self.slot1_active = True
 
-        def func1(event):
+        def func1():
             threading.Thread(target=slot1_pressed).start()
 
         def slot2_pressed():
+            if not self.slot2_active:
+                quit()
+            else:
+                self.slot2_active = False
             style.configure(
                 "slot2.Horizontal.TProgressbar",
                 background=self.color[self.slot2_property[1]][0],
@@ -300,11 +314,16 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             progressbar_left_edge_slot2.itemconfig(
                 id, fill=self.color[self.slot2_property[1]][0]
             )
+            self.slot2_active = True
 
-        def func2(event):
+        def func2():
             threading.Thread(target=slot2_pressed).start()
 
         def slot3_pressed():
+            if not self.slot3_active:
+                quit()
+            else:
+                self.slot3_active = False
             style.configure(
                 "slot3.Horizontal.TProgressbar",
                 background=self.color[self.slot3_property[1]][0],
@@ -339,11 +358,16 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             progressbar_left_edge_slot3.itemconfig(
                 id, fill=self.color[self.slot3_property[1]][0]
             )
+            self.slot3_active = True
 
-        def func3(event):
+        def func3():
             threading.Thread(target=slot3_pressed).start()
 
         def slot4_pressed():
+            if not self.slot4_active:
+                quit()
+            else:
+                self.slot4_active = False
             style.configure(
                 "slot4.Horizontal.TProgressbar",
                 background=self.color[self.slot4_property[1]][0],
@@ -378,9 +402,45 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             progressbar_left_edge_slot4.itemconfig(
                 id, fill=self.color[self.slot4_property[1]][0]
             )
+            self.slot4_active = True
 
-        def func4(event):
+        def func4():
             threading.Thread(target=slot4_pressed).start()
+
+        def keylogger():
+            key_pressed = False
+            while True:
+                if keyboard.is_pressed("1"):
+                    self.current_slot = 1
+                elif keyboard.is_pressed("2"):
+                    self.current_slot = 2
+                elif keyboard.is_pressed("3"):
+                    self.current_slot = 3
+                elif keyboard.is_pressed("4"):
+                    self.current_slot = 4
+                else:
+                    pass
+                # print(self.current_slot)
+                if keyboard.is_pressed("e"):
+                    key_pressed = True
+                else:
+                    pass
+                if key_pressed and not keyboard.is_pressed("e"):
+                    if self.current_slot == 1:
+                        func1()
+                        key_pressed = False
+                    elif self.current_slot == 2:
+                        func2()
+                        key_pressed = False
+                    elif self.current_slot == 3:
+                        func3()
+                        key_pressed = False
+                    elif self.current_slot == 4:
+                        func4()
+                        key_pressed = False
+                    else:
+                        pass
+                time.sleep(20 / 1000)
 
         style = Style()
         style.configure("slot1.Horizontal.TProgressbar", troughcolor="#C3C3C3")
@@ -523,7 +583,6 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot1.Horizontal.TProgressbar",
             background=self.color[self.slot1_property[1]][0],
         )
-        progressbar_slot1.bind("<Button-1>", func1)
 
         progressbar_slot2 = ttk.Progressbar(
             inner,
@@ -547,7 +606,6 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot2.Horizontal.TProgressbar",
             background=self.color[self.slot2_property[1]][0],
         )
-        progressbar_slot2.bind("<Button-1>", func2)
 
         progressbar_slot3 = ttk.Progressbar(
             inner,
@@ -571,7 +629,6 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
         )
         progressbar_slot3["maximum"] = 1
         progressbar_slot3["value"] = 1
-        progressbar_slot3.bind("<Button-1>", func3)
 
         progressbar_slot4 = ttk.Progressbar(
             inner,
@@ -595,7 +652,8 @@ H8KTyOZ1ITJcpFyAIz6EGUaYYf8BCUjkMPuZeUAAAAAASUVORK5CYII=""",
             "slot4.Horizontal.TProgressbar",
             background=self.color[self.slot4_property[1]][0],
         )
-        progressbar_slot4.bind("<Button-1>", func4)
+
+        threading.Thread(target=keylogger).start()
 
         root.bind("<Escape>", close)
         root.mainloop()
